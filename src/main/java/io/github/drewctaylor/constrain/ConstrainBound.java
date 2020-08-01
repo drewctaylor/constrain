@@ -1,6 +1,5 @@
 package io.github.drewctaylor.constrain;
 
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedIntegerConcrete;
 import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedInteger;
 
 import static io.github.drewctaylor.require.Require.requireNonNull;
@@ -14,16 +13,17 @@ public final class ConstrainBound
     {
     }
 
-    private static class HelperForBounded<TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>>
+    @SuppressWarnings("FieldNotUsedInToString")
+    private abstract static class HelperForBounded<TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>>
     {
         private final TYPE value;
-        private final TypeEncodedIntegerConcrete<MIN> minimum;
-        private final TypeEncodedIntegerConcrete<MAX> maximum;
+        private final TypeEncodedInteger<MIN> minimum;
+        private final TypeEncodedInteger<MAX> maximum;
 
         private HelperForBounded(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MIN> minimum,
-                final TypeEncodedIntegerConcrete<MAX> maximum)
+                final TypeEncodedInteger<MIN> minimum,
+                final TypeEncodedInteger<MAX> maximum)
         {
             this.value = value;
             this.minimum = minimum;
@@ -45,7 +45,7 @@ public final class ConstrainBound
          *
          * @return the minimum value, encoded as a type.
          */
-        public final TypeEncodedIntegerConcrete<MIN> getMinimum()
+        public final TypeEncodedInteger<MIN> getMinimum()
         {
             return minimum;
         }
@@ -55,10 +55,12 @@ public final class ConstrainBound
          *
          * @return the maximum value, encoded as a type.
          */
-        public final TypeEncodedIntegerConcrete<MAX> getMaximum()
+        public final TypeEncodedInteger<MAX> getMaximum()
         {
             return maximum;
         }
+
+        public abstract String toString();
     }
 
     private static final class InclusiveDefault<TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> extends HelperForBounded<TYPE, MIN, MAX>
@@ -66,10 +68,20 @@ public final class ConstrainBound
     {
         private InclusiveDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MIN> minimum,
-                final TypeEncodedIntegerConcrete<MAX> maximum)
+                final TypeEncodedInteger<MIN> minimum,
+                final TypeEncodedInteger<MAX> maximum)
         {
             super(value, minimum, maximum);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "InclusiveDefault{" +
+                    "value=" + getValue() +
+                    ", minimum=" + getMinimum() +
+                    ", maximum=" + getMaximum() +
+                    '}';
         }
     }
 
@@ -78,10 +90,20 @@ public final class ConstrainBound
     {
         private ExclusiveDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MIN> minimum,
-                final TypeEncodedIntegerConcrete<MAX> maximum)
+                final TypeEncodedInteger<MIN> minimum,
+                final TypeEncodedInteger<MAX> maximum)
         {
             super(value, minimum, maximum);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "ExclusiveDefault{" +
+                    "value=" + getValue() +
+                    ", minimum=" + getMinimum() +
+                    ", maximum=" + getMaximum() +
+                    '}';
         }
     }
 
@@ -90,10 +112,20 @@ public final class ConstrainBound
     {
         private MinimumExclusiveMaximumInclusiveDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MIN> minimum,
-                final TypeEncodedIntegerConcrete<MAX> maximum)
+                final TypeEncodedInteger<MIN> minimum,
+                final TypeEncodedInteger<MAX> maximum)
         {
             super(value, minimum, maximum);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "MinimumExclusiveMaximumInclusiveDefault{" +
+                    "value=" + getValue() +
+                    ", minimum=" + getMinimum() +
+                    ", maximum=" + getMaximum() +
+                    '}';
         }
     }
 
@@ -102,10 +134,20 @@ public final class ConstrainBound
     {
         private MinimumInclusiveMaximumExclusiveDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MIN> minimum,
-                final TypeEncodedIntegerConcrete<MAX> maximum)
+                final TypeEncodedInteger<MIN> minimum,
+                final TypeEncodedInteger<MAX> maximum)
         {
             super(value, minimum, maximum);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "MinimumInclusiveMaximumExclusiveDefault{" +
+                    "value=" + getValue() +
+                    ", minimum=" + getMinimum() +
+                    ", maximum=" + getMaximum() +
+                    '}';
         }
     }
 
@@ -166,17 +208,15 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
      */
-    static <TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Inclusive<TYPE, MIN, MAX> constrain(
+    public static <TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Inclusive<TYPE, MIN, MAX> constrain(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum)
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum)
     {
         requireNonNull(value, "value");
         requireNonNull(minimum, "minimum");
@@ -194,17 +234,15 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
      */
     static <TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Exclusive<TYPE, MIN, MAX> constrainExclusive(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum)
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum)
     {
         requireNonNull(value, "value");
         requireNonNull(minimum, "minimum");
@@ -222,17 +260,15 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
      */
     static <TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumExclusiveMaximumInclusive<TYPE, MIN, MAX> constrainMinimumExclusiveMaximumInclusive(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum)
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum)
     {
         requireNonNull(value, "value");
         requireNonNull(minimum, "minimum");
@@ -250,17 +286,15 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
      */
     static <TYPE, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumInclusiveMaximumExclusive<TYPE, MIN, MAX> constrainMinimumInclusiveMaximumExclusive(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum)
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum)
     {
         requireNonNull(value, "value");
         requireNonNull(minimum, "minimum");
@@ -269,14 +303,15 @@ public final class ConstrainBound
         return new MinimumInclusiveMaximumExclusiveDefault<>(value, minimum, maximum);
     }
 
-    private static class HelperForUnbounded<TYPE, CONSTRAINT extends TypeEncodedInteger<CONSTRAINT>>
+    @SuppressWarnings("FieldNotUsedInToString")
+    private abstract static class HelperForUnbounded<TYPE, CONSTRAINT extends TypeEncodedInteger<CONSTRAINT>>
     {
         private final TYPE value;
-        private final TypeEncodedIntegerConcrete<CONSTRAINT> constraint;
+        private final TypeEncodedInteger<CONSTRAINT> constraint;
 
         private HelperForUnbounded(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<CONSTRAINT> constraint)
+                final TypeEncodedInteger<CONSTRAINT> constraint)
         {
             this.value = value;
             this.constraint = constraint;
@@ -298,7 +333,7 @@ public final class ConstrainBound
          * @return the maximum value, encoded as a type.
          */
         @SuppressWarnings("SuspiciousGetterSetter")
-        public final TypeEncodedIntegerConcrete<CONSTRAINT> getMaximum()
+        public final TypeEncodedInteger<CONSTRAINT> getMaximum()
         {
             return constraint;
         }
@@ -309,20 +344,31 @@ public final class ConstrainBound
          * @return the minimum value, encoded as a type.
          */
         @SuppressWarnings("SuspiciousGetterSetter")
-        public final TypeEncodedIntegerConcrete<CONSTRAINT> getMinimum()
+        public final TypeEncodedInteger<CONSTRAINT> getMinimum()
         {
             return constraint;
         }
 
+        public abstract String toString();
     }
 
     private static final class MaximumDefault<TYPE, MAX extends TypeEncodedInteger<MAX>> extends HelperForUnbounded<TYPE, MAX> implements Maximum<TYPE, MAX>
     {
         private MaximumDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MAX> bound)
+                final TypeEncodedInteger<MAX> bound)
         {
             super(value, bound);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "MaximumDefault{" +
+                    "value=" + getValue() +
+                    ", maximum=" + getMaximum() +
+                    ", minimum=" + getMinimum() +
+                    '}';
         }
     }
 
@@ -330,9 +376,19 @@ public final class ConstrainBound
     {
         private MaximumExclusiveDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MAX> bound)
+                final TypeEncodedInteger<MAX> bound)
         {
             super(value, bound);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "MaximumExclusiveDefault{" +
+                    "value=" + getValue() +
+                    ", maximum=" + getMaximum() +
+                    ", minimum=" + getMinimum() +
+                    '}';
         }
     }
 
@@ -340,9 +396,19 @@ public final class ConstrainBound
     {
         private MinimumDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MAX> bound)
+                final TypeEncodedInteger<MAX> bound)
         {
             super(value, bound);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "MinimumDefault{" +
+                    "value=" + getValue() +
+                    ", maximum=" + getMaximum() +
+                    ", minimum=" + getMinimum() +
+                    '}';
         }
     }
 
@@ -350,9 +416,19 @@ public final class ConstrainBound
     {
         private MinimumExclusiveDefault(
                 final TYPE value,
-                final TypeEncodedIntegerConcrete<MAX> bound)
+                final TypeEncodedInteger<MAX> bound)
         {
             super(value, bound);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "MinimumExclusiveDefault{" +
+                    "value=" + getValue() +
+                    ", maximum=" + getMaximum() +
+                    ", minimum=" + getMinimum() +
+                    '}';
         }
     }
 
@@ -376,7 +452,7 @@ public final class ConstrainBound
          *
          * @return the maximum value, encoded as a type.
          */
-        TypeEncodedIntegerConcrete<MAX> getMaximum();
+        TypeEncodedInteger<MAX> getMaximum();
     }
 
     /**
@@ -409,7 +485,7 @@ public final class ConstrainBound
          *
          * @return the minimum value, encoded as a type.
          */
-        TypeEncodedIntegerConcrete<MIN> getMinimum();
+        TypeEncodedInteger<MIN> getMinimum();
     }
 
     /**
@@ -429,15 +505,13 @@ public final class ConstrainBound
      * @param  maximum              the given maximum value
      * @param  <TYPE>               the type of the given value
      * @param  <MAX>                the maximum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if maximum is null
      */
-    static <TYPE, MAX extends TypeEncodedInteger<MAX>> Maximum<TYPE, MAX> constrainMaximum(
+    public static <TYPE, MAX extends TypeEncodedInteger<MAX>> Maximum<TYPE, MAX> constrainMaximum(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MAX> maximum)
+            final TypeEncodedInteger<MAX> maximum)
     {
         requireNonNull(value, "value");
         requireNonNull(maximum, "maximum");
@@ -452,15 +526,13 @@ public final class ConstrainBound
      * @param  maximum              the given maximum value
      * @param  <TYPE>               the type of the given value
      * @param  <MAX>                the maximum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if maximum is null
      */
-    static <TYPE, MAX extends TypeEncodedInteger<MAX>> MaximumExclusive<TYPE, MAX> constrainMaximumExclusive(
+    public static <TYPE, MAX extends TypeEncodedInteger<MAX>> MaximumExclusive<TYPE, MAX> constrainMaximumExclusive(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MAX> maximum)
+            final TypeEncodedInteger<MAX> maximum)
     {
         requireNonNull(value, "value");
         requireNonNull(maximum, "maximum");
@@ -475,15 +547,13 @@ public final class ConstrainBound
      * @param  minimum              the given minimum value
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      */
-    static <TYPE, MIN extends TypeEncodedInteger<MIN>> Minimum<TYPE, MIN> constrainMinimum(
+    public static <TYPE, MIN extends TypeEncodedInteger<MIN>> Minimum<TYPE, MIN> constrainMinimum(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MIN> minimum)
+            final TypeEncodedInteger<MIN> minimum)
     {
         requireNonNull(value, "value");
         requireNonNull(minimum, "minimum");
@@ -498,15 +568,13 @@ public final class ConstrainBound
      * @param  minimum              the given minimum value
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
-     * 
      * @return                      the given value
-     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      */
-    static <TYPE, MIN extends TypeEncodedInteger<MIN>> MinimumExclusive<TYPE, MIN> constrainMinimumExclusive(
+    public static <TYPE, MIN extends TypeEncodedInteger<MIN>> MinimumExclusive<TYPE, MIN> constrainMinimumExclusive(
             final TYPE value,
-            final TypeEncodedIntegerConcrete<MIN> minimum)
+            final TypeEncodedInteger<MIN> minimum)
     {
         requireNonNull(value, "value");
         requireNonNull(minimum, "minimum");

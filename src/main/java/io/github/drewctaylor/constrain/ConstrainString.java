@@ -8,9 +8,7 @@ import io.github.drewctaylor.constrain.ConstrainBound.Minimum;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusiveMaximumInclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumInclusiveMaximumExclusive;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedIntegerConcrete;
 import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedInteger;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0$;
 
 import static io.github.drewctaylor.constrain.ConstrainBound.constrain;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainExclusive;
@@ -20,6 +18,8 @@ import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimum;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumExclusive;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumExclusiveMaximumInclusive;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumInclusiveMaximumExclusive;
+import static io.github.drewctaylor.constrain.Empty.fromInclusive;
+import static io.github.drewctaylor.constrain.NonEmpty.fromMinimumExclusive;
 import static io.github.drewctaylor.require.Require.requireNonNull;
 import static io.github.drewctaylor.require.RequireString.requireEmpty;
 import static io.github.drewctaylor.require.RequireString.requireLength;
@@ -48,19 +48,17 @@ public final class ConstrainString
      *
      * @param  string                   the given string
      * @param  name                     the name of the given string
-     * 
      * @return                          the given string, if empty
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string is not empty
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static Inclusive<String, _0$, _0$> constrainEmpty(
+    public static Empty<String> constrainEmpty(
             final String string,
             final String name)
     {
-        return constrain(requireEmpty(string, name), integer(_0()), integer(_0()));
+        return fromInclusive(constrain(requireEmpty(string, name), integer(_0()), integer(_0())));
     }
 
     /**
@@ -68,19 +66,17 @@ public final class ConstrainString
      *
      * @param  string                   the given string
      * @param  name                     the name of the given string
-     * 
      * @return                          the given string, if non-empty
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string is not empty
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static MinimumExclusive<String, _0$> constrainNonEmpty(
+    public static NonEmpty<String> constrainNonEmpty(
             final String string,
             final String name)
     {
-        return constrainMinimumExclusive(requireNonEmpty(string, name), integer(_0()));
+        return fromMinimumExclusive(constrainMinimumExclusive(requireNonEmpty(string, name), integer(_0())));
     }
 
     /**
@@ -90,9 +86,7 @@ public final class ConstrainString
      * @param  maximum                  the given maximum
      * @param  name                     the name of the given string
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given string, if length less than the given maximum
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not less than the given maximum
      * @throws NullPointerException     if maximum is null
@@ -101,7 +95,7 @@ public final class ConstrainString
      */
     public static <MAX extends TypeEncodedInteger<MAX>> MaximumExclusive<String, MAX> constrainLengthLessThan(
             final String string,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(maximum, "maximum");
@@ -117,9 +111,7 @@ public final class ConstrainString
      * @param  maximum                  the given maximum
      * @param  name                     the name of the given string
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given string, if length is less than or equal to the given maximum
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not less than or equal to the given maximum
      * @throws NullPointerException     if maximum is null
@@ -128,7 +120,7 @@ public final class ConstrainString
      */
     public static <MAX extends TypeEncodedInteger<MAX>> Maximum<String, MAX> constrainLengthLessThanOrEqual(
             final String string,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(maximum, "maximum");
@@ -143,9 +135,7 @@ public final class ConstrainString
      * @param  length                   the given length
      * @param  name                     the name of the given string
      * @param  <LENGTH>                 the type of the given length
-     * 
      * @return                          the given string, if length is the given length
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not the given length
      * @throws NullPointerException     if length is null
@@ -154,7 +144,7 @@ public final class ConstrainString
      */
     public static <LENGTH extends TypeEncodedInteger<LENGTH>> Inclusive<String, LENGTH, LENGTH> constrainLength(
             final String string,
-            final TypeEncodedIntegerConcrete<LENGTH> length,
+            final TypeEncodedInteger<LENGTH> length,
             final String name)
     {
         requireNonNull(length, "length");
@@ -170,9 +160,7 @@ public final class ConstrainString
      * @param  minimum                  the given minimum
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
-     * 
      * @return                          the given string, if length is greater than or equal to the given length
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not greater than or equal to the given length
      * @throws NullPointerException     if minimum is null
@@ -181,7 +169,7 @@ public final class ConstrainString
      */
     public static <MIN extends TypeEncodedInteger<MIN>> Minimum<String, MIN> constrainLengthGreaterThanOrEqual(
             final String string,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
+            final TypeEncodedInteger<MIN> minimum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -196,9 +184,7 @@ public final class ConstrainString
      * @param  minimum                  the given minimum
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
-     * 
      * @return                          the given string, if length is greater than the given length
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not greater than the given length
      * @throws NullPointerException     if minimum is null
@@ -207,7 +193,7 @@ public final class ConstrainString
      */
     public static <MIN extends TypeEncodedInteger<MIN>> MinimumExclusive<String, MIN> constrainLengthGreaterThan(
             final String string,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
+            final TypeEncodedInteger<MIN> minimum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -225,9 +211,7 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -237,8 +221,8 @@ public final class ConstrainString
      */
     public static <MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Inclusive<String, MIN, MAX> constrainLength(
             final String string,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -257,9 +241,7 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -269,8 +251,8 @@ public final class ConstrainString
      */
     public static <MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Exclusive<String, MIN, MAX> constrainLengthExclusive(
             final String string,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -289,9 +271,7 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -301,8 +281,8 @@ public final class ConstrainString
      */
     public static <MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumExclusiveMaximumInclusive<String, MIN, MAX> constrainLengthMinimumExclusiveMaximumInclusive(
             final String string,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -321,9 +301,7 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -333,8 +311,8 @@ public final class ConstrainString
      */
     public static <MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumInclusiveMaximumExclusive<String, MIN, MAX> constrainLengthMinimumInclusiveMaximumExclusive(
             final String string,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");

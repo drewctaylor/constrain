@@ -8,9 +8,7 @@ import io.github.drewctaylor.constrain.ConstrainBound.Minimum;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusiveMaximumInclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumInclusiveMaximumExclusive;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedIntegerConcrete;
 import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedInteger;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0$;
 
 import java.util.Collection;
 
@@ -22,6 +20,8 @@ import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimum;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumExclusive;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumExclusiveMaximumInclusive;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumInclusiveMaximumExclusive;
+import static io.github.drewctaylor.constrain.Empty.fromInclusive;
+import static io.github.drewctaylor.constrain.NonEmpty.fromMinimumExclusive;
 import static io.github.drewctaylor.require.Require.requireNonNull;
 import static io.github.drewctaylor.require.RequireCollection.requireEmpty;
 import static io.github.drewctaylor.require.RequireCollection.requireNonEmpty;
@@ -52,19 +52,17 @@ public final class ConstrainCollection
      * @param  name                     the name of the given collection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
-     * 
      * @return                          the given collection, if empty
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection is not empty
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static <TYPE, COLLECTION extends Collection<TYPE>> Inclusive<COLLECTION, _0$, _0$> constrainEmpty(
+    public static <TYPE, COLLECTION extends Collection<TYPE>> Empty<COLLECTION> constrainEmpty(
             final COLLECTION collection,
             final String name)
     {
-        return constrain(requireEmpty(collection, name), integer(_0()), integer(_0()));
+        return fromInclusive(constrain(requireEmpty(collection, name), integer(_0()), integer(_0())));
     }
 
     /**
@@ -74,19 +72,17 @@ public final class ConstrainCollection
      * @param  name                     the name of the given collection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
-     * 
      * @return                          the given collection, if non-empty
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection is not empty
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static <TYPE, COLLECTION extends Collection<TYPE>> MinimumExclusive<COLLECTION, _0$> constrainNonEmpty(
+    public static <TYPE, COLLECTION extends Collection<TYPE>> NonEmpty<COLLECTION> constrainNonEmpty(
             final COLLECTION collection,
             final String name)
     {
-        return constrainMinimumExclusive(requireNonEmpty(collection, name), integer(_0()));
+        return fromMinimumExclusive(constrainMinimumExclusive(requireNonEmpty(collection, name), integer(_0())));
     }
 
     /**
@@ -98,9 +94,7 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given collection, if size less than the given maximum
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not less than the given maximum
      * @throws NullPointerException     if maximum is null
@@ -109,7 +103,7 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MAX extends TypeEncodedInteger<MAX>> MaximumExclusive<COLLECTION, MAX> constrainSizeLessThan(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(maximum, "maximum");
@@ -127,9 +121,7 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given collection, if size is less than or equal to the given maximum
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not less than or equal to the given maximum
      * @throws NullPointerException     if maximum is null
@@ -138,7 +130,7 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MAX extends TypeEncodedInteger<MAX>> Maximum<COLLECTION, MAX> constrainSizeLessThanOrEqual(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(maximum, "maximum");
@@ -155,9 +147,7 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <SIZE>                   the given size, encoded as a type
-     * 
      * @return                          the given collection, if size is the given size
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not the given size
      * @throws NullPointerException     if size is null
@@ -166,7 +156,7 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, SIZE extends TypeEncodedInteger<SIZE>> Inclusive<COLLECTION, SIZE, SIZE> constrainSize(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<SIZE> size,
+            final TypeEncodedInteger<SIZE> size,
             final String name)
     {
         requireNonNull(size, "size");
@@ -184,9 +174,7 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
-     * 
      * @return                          the given collection, if size is greater than or equal to the given size
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not greater than or equal to the given size
      * @throws NullPointerException     if minimum is null
@@ -195,7 +183,7 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MIN extends TypeEncodedInteger<MIN>> Minimum<COLLECTION, MIN> constrainSizeGreaterThanOrEqual(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
+            final TypeEncodedInteger<MIN> minimum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -212,9 +200,7 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
-     * 
      * @return                          the given collection, if size is greater than the given size
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not greater than the given size
      * @throws NullPointerException     if minimum is null
@@ -223,7 +209,7 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MIN extends TypeEncodedInteger<MIN>> MinimumExclusive<COLLECTION, MIN> constrainSizeGreaterThan(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
+            final TypeEncodedInteger<MIN> minimum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -243,9 +229,7 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -255,8 +239,8 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Inclusive<COLLECTION, MIN, MAX> constrainSize(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -277,9 +261,7 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -289,8 +271,8 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Exclusive<COLLECTION, MIN, MAX> constrainSizeExclusive(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -312,9 +294,7 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -324,8 +304,8 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumExclusiveMaximumInclusive<COLLECTION, MIN, MAX> constrainSizeMinimumExclusiveMaximumInclusive(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -347,9 +327,7 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -359,8 +337,8 @@ public final class ConstrainCollection
      */
     public static <TYPE, COLLECTION extends Collection<TYPE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumInclusiveMaximumExclusive<COLLECTION, MIN, MAX> constrainSizeMinimumInclusiveMaximumExclusive(
             final COLLECTION collection,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");

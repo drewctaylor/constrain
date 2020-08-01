@@ -1,11 +1,17 @@
 package io.github.drewctaylor.constrain.test;
 
+import io.github.drewctaylor.constrain.ConstrainCollection;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collection;
+import java.util.List;
 
 import static io.github.drewctaylor.constrain.ConstrainCollection.constrainEmpty;
 import static io.github.drewctaylor.constrain.ConstrainCollection.constrainNonEmpty;
+import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0;
+import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._1;
+import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._2;
+import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.integer;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,131 +45,53 @@ final class ConstrainCollectionTest
         assertThrows(IllegalArgumentException.class, () -> constrainNonEmpty(emptyList(), "name"));
         assertEquals(valid, constrainNonEmpty(valid, "name").getValue());
     }
-    //
-    // private static <TYPE, COLLECTION extends Collection<TYPE>> void testConstrainSizeHelper(
-    // final List<COLLECTION> list)
-    // {
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) < 0).forEach(value -> assertThrows(NullPointerException.class, () ->
-    // constrainSizeLessThan(value, bound, null))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) <= 0).forEach(value -> assertThrows(NullPointerException.class, () ->
-    // constrainSizeLessThanOrEqual(value, bound, null))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) == 0).forEach(value -> assertThrows(NullPointerException.class, () ->
-    // constrainSize(value, bound, null))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) >= 0).forEach(value -> assertThrows(NullPointerException.class, () ->
-    // constrainSizeGreaterThanOrEqual(value, bound, null))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) > 0).forEach(value -> assertThrows(NullPointerException.class, () ->
-    // constrainSizeGreaterThan(value, bound, null))));
-    //
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) < 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeLessThan(value, bound, ""))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) <= 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeLessThanOrEqual(value, bound, ""))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) == 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSize(value, bound, ""))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) >= 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeGreaterThanOrEqual(value, bound, ""))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) > 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeGreaterThan(value, bound, ""))));
-    //
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) < 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeLessThan(value, bound, " "))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) <= 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeLessThanOrEqual(value, bound, " "))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) == 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSize(value, bound, " "))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) >= 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeGreaterThanOrEqual(value, bound, " "))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) > 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeGreaterThan(value, bound, " "))));
-    //
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) < 0).forEach(value -> assertEquals(value, constrainSizeLessThan(value, bound,
-    // "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) <= 0).forEach(value -> assertEquals(value, constrainSizeLessThanOrEqual(value,
-    // bound, "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) == 0).forEach(value -> assertEquals(value, constrainSize(value, bound,
-    // "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) >= 0).forEach(value -> assertEquals(value,
-    // constrainSizeGreaterThanOrEqual(value, bound, "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) > 0).forEach(value -> assertEquals(value, constrainSizeGreaterThan(value,
-    // bound, "name"))));
-    //
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) >= 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeLessThan(value, bound, "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) > 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeLessThanOrEqual(value, bound, "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) != 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSize(value, bound, "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) < 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeGreaterThanOrEqual(value, bound, "name"))));
-    // list.stream().map(Collection::size).forEach(bound -> list.stream().filter(value ->
-    // valueOf(value.size()).compareTo(bound) <= 0).forEach(value -> assertThrows(IllegalArgumentException.class, () ->
-    // constrainSizeGreaterThan(value, bound, "name"))));
-    //
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) <= 0 ||
-    // valueOf(value.size()).compareTo(boundMaximum) >= 0).forEach(value -> assertThrows(IllegalArgumentException.class, ()
-    // -> constrainSizeExclusive(value, boundMinimum, boundMaximum, "name")))));
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) < 0 ||
-    // valueOf(value.size()).compareTo(boundMaximum) > 0).forEach(value -> assertThrows(IllegalArgumentException.class, ()
-    // -> constrainSize(value, boundMinimum, boundMaximum, "name")))));
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) <= 0 ||
-    // valueOf(value.size()).compareTo(boundMaximum) > 0).forEach(value -> assertThrows(IllegalArgumentException.class, ()
-    // -> constrainSizeMinimumExclusiveMaximumInclusive(value, boundMinimum, boundMaximum, "name")))));
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) < 0 ||
-    // valueOf(value.size()).compareTo(boundMaximum) >= 0).forEach(value -> assertThrows(IllegalArgumentException.class, ()
-    // -> constrainSizeMinimumInclusiveMaximumExclusive(value, boundMinimum, boundMaximum, "name")))));
-    //
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) > 0 &&
-    // valueOf(value.size()).compareTo(boundMaximum) < 0).forEach(value -> assertEquals(value, constrainSizeExclusive(value,
-    // boundMinimum, boundMaximum, "name")))));
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) >= 0 &&
-    // valueOf(value.size()).compareTo(boundMaximum) <= 0).forEach(value -> assertEquals(value, constrainSize(value,
-    // boundMinimum, boundMaximum, "name")))));
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) > 0 &&
-    // valueOf(value.size()).compareTo(boundMaximum) <= 0).forEach(value -> assertEquals(value,
-    // constrainSizeMinimumExclusiveMaximumInclusive(value, boundMinimum, boundMaximum, "name")))));
-    // list.stream().map(Collection::size).forEach(boundMinimum -> list.stream().map(Collection::size).forEach(boundMaximum
-    // -> list.stream().filter(value -> valueOf(value.size()).compareTo(boundMinimum) >= 0 &&
-    // valueOf(value.size()).compareTo(boundMaximum) < 0).forEach(value -> assertEquals(value,
-    // constrainSizeMinimumInclusiveMaximumExclusive(value, boundMinimum, boundMaximum, "name")))));
-    // }
-    //
-    // @Test
-    // void testConstrainSize()
-    // {
-    // testConstrainSizeHelper(range(0, 6).mapToObj(i -> range(0, i + 1).mapToObj(index -> new
-    // Object()).collect(toList())).collect(toList()));
-    // testConstrainSizeHelper(range(0, 6).mapToObj(i -> range(0, i + 1).mapToObj(index -> new
-    // Object()).collect(toSet())).collect(toList()));
-    // }
+
+    @Test
+    void testConstrainSize()
+    {
+
+        assertThrows(NullPointerException.class, () -> ConstrainCollection.constrainSizeLessThan(emptyList(), integer(_0()), null));
+        assertThrows(NullPointerException.class, () -> ConstrainCollection.constrainSizeLessThanOrEqual(emptyList(), integer(_0()), null));
+        assertThrows(NullPointerException.class, () -> ConstrainCollection.constrainSize(emptyList(), integer(_0()), null));
+        assertThrows(NullPointerException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(emptyList(), integer(_0()), null));
+        assertThrows(NullPointerException.class, () -> ConstrainCollection.constrainSizeGreaterThan(emptyList(), integer(_0()), null));
+
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThan(emptyList(), integer(_0()), ""));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThanOrEqual(emptyList(), integer(_0()), ""));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(emptyList(), integer(_0()), ""));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(emptyList(), integer(_0()), ""));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThan(emptyList(), integer(_0()), ""));
+
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThan(emptyList(), integer(_0()), " "));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThanOrEqual(emptyList(), integer(_0()), " "));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(emptyList(), integer(_0()), " "));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(emptyList(), integer(_0()), " "));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThan(emptyList(), integer(_0()), " "));
+
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeLessThan(List.of(0), integer(_2()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeLessThanOrEqual(List.of(0), integer(_1()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSize(List.of(0), integer(_1()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeGreaterThanOrEqual(List.of(0), integer(_1()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeGreaterThan(List.of(0), integer(_0()), "name").getValue());
+
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThan(List.of(0), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThanOrEqual(List.of(0), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(List.of(0), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(List.of(0), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThan(List.of(0), integer(_1()), "name"));
+
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeExclusive(List.of(0), integer(_0()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeExclusive(List.of(0), integer(_1()), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(List.of(0), integer(_1()), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(List.of(0), integer(_2()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(List.of(0), integer(_1()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(List.of(0), integer(_0()), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(List.of(0), integer(_2()), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(List.of(0), integer(_1()), integer(_1()), "name"));
+
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeExclusive(List.of(0), integer(_0()), integer(_2()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSize(List.of(0), integer(_1()), integer(_1()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(List.of(0), integer(_0()), integer(_1()), "name").getValue());
+        assertEquals(List.of(0), ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(List.of(0), integer(_1()), integer(_2()), "name").getValue());
+    }
 }

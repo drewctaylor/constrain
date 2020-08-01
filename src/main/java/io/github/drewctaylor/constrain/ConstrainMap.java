@@ -8,9 +8,7 @@ import io.github.drewctaylor.constrain.ConstrainBound.Minimum;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusiveMaximumInclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumInclusiveMaximumExclusive;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedIntegerConcrete;
 import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.TypeEncodedInteger;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0$;
 
 import java.util.Map;
 
@@ -22,6 +20,8 @@ import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimum;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumExclusive;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumExclusiveMaximumInclusive;
 import static io.github.drewctaylor.constrain.ConstrainBound.constrainMinimumInclusiveMaximumExclusive;
+import static io.github.drewctaylor.constrain.Empty.fromInclusive;
+import static io.github.drewctaylor.constrain.NonEmpty.fromMinimumExclusive;
 import static io.github.drewctaylor.require.Require.requireNonNull;
 import static io.github.drewctaylor.require.RequireMap.requireEmpty;
 import static io.github.drewctaylor.require.RequireMap.requireNonEmpty;
@@ -53,19 +53,17 @@ public final class ConstrainMap
      * @param  <KEY>                    the type of the map key
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
-     * 
      * @return                          the given map, if empty
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map is not empty
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static <KEY, VALUE, MAP extends Map<KEY, VALUE>> Inclusive<MAP, _0$, _0$> constrainEmpty(
+    public static <KEY, VALUE, MAP extends Map<KEY, VALUE>> Empty<MAP> constrainEmpty(
             final MAP map,
             final String name)
     {
-        return constrain(requireEmpty(map, name), integer(_0()), integer(_0()));
+        return fromInclusive(constrain(requireEmpty(map, name), integer(_0()), integer(_0())));
     }
 
     /**
@@ -76,19 +74,17 @@ public final class ConstrainMap
      * @param  <KEY>                    the type of the map key
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
-     * 
      * @return                          the given map, if non-empty
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map is not empty
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is empty
      */
-    public static <KEY, VALUE, MAP extends Map<KEY, VALUE>> MinimumExclusive<MAP, _0$> constrainNonEmpty(
+    public static <KEY, VALUE, MAP extends Map<KEY, VALUE>> NonEmpty<MAP> constrainNonEmpty(
             final MAP map,
             final String name)
     {
-        return constrainMinimumExclusive(requireNonEmpty(map, name), integer(_0()));
+        return fromMinimumExclusive(constrainMinimumExclusive(requireNonEmpty(map, name), integer(_0())));
     }
 
     /**
@@ -101,9 +97,7 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given map, if size less than the given maximum
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not less than the given maximum
      * @throws NullPointerException     if maximum is null
@@ -112,7 +106,7 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MAX extends TypeEncodedInteger<MAX>> MaximumExclusive<MAP, MAX> constrainSizeLessThan(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(maximum, "maximum");
@@ -131,9 +125,7 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given map, if size is less than or equal to the given maximum
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not less than or equal to the given maximum
      * @throws NullPointerException     if maximum is null
@@ -142,7 +134,7 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MAX extends TypeEncodedInteger<MAX>> Maximum<MAP, MAX> constrainSizeLessThanOrEqual(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(maximum, "maximum");
@@ -160,9 +152,7 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <SIZE>                   the type of the given size
-     * 
      * @return                          the given map, if size is the given size
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not the given size
      * @throws NullPointerException     if size is null
@@ -171,7 +161,7 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, SIZE extends TypeEncodedInteger<SIZE>> Inclusive<MAP, SIZE, SIZE> constrainSize(
             final MAP map,
-            final TypeEncodedIntegerConcrete<SIZE> size,
+            final TypeEncodedInteger<SIZE> size,
             final String name)
     {
         requireNonNull(size, "size");
@@ -190,9 +180,7 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
-     * 
      * @return                          the given map, if size is greater than or equal to the given size
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not greater than or equal to the given size
      * @throws NullPointerException     if minimum is null
@@ -201,7 +189,7 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MIN extends TypeEncodedInteger<MIN>> Minimum<MAP, MIN> constrainSizeGreaterThanOrEqual(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
+            final TypeEncodedInteger<MIN> minimum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -219,9 +207,7 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
-     * 
      * @return                          the given map, if size is greater than the given size
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not greater than the given size
      * @throws NullPointerException     if minimum is null
@@ -230,7 +216,7 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MIN extends TypeEncodedInteger<MIN>> MinimumExclusive<MAP, MIN> constrainSizeGreaterThan(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
+            final TypeEncodedInteger<MIN> minimum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -251,9 +237,7 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -263,8 +247,8 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Inclusive<MAP, MIN, MAX> constrainSize(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -286,9 +270,7 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -298,8 +280,8 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> Exclusive<MAP, MIN, MAX> constrainSizeExclusive(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -321,9 +303,7 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -333,8 +313,8 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumExclusiveMaximumInclusive<MAP, MIN, MAX> constrainSizeMinimumExclusiveMaximumInclusive(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");
@@ -356,9 +336,7 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
-     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
-     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -368,8 +346,8 @@ public final class ConstrainMap
      */
     public static <KEY, VALUE, MAP extends Map<KEY, VALUE>, MIN extends TypeEncodedInteger<MIN>, MAX extends TypeEncodedInteger<MAX>> MinimumInclusiveMaximumExclusive<MAP, MIN, MAX> constrainSizeMinimumInclusiveMaximumExclusive(
             final MAP map,
-            final TypeEncodedIntegerConcrete<MIN> minimum,
-            final TypeEncodedIntegerConcrete<MAX> maximum,
+            final TypeEncodedInteger<MIN> minimum,
+            final TypeEncodedInteger<MAX> maximum,
             final String name)
     {
         requireNonNull(minimum, "minimum");

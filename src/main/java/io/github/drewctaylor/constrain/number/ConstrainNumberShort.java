@@ -1,19 +1,10 @@
-package io.github.drewctaylor.constrain;
-
-import io.github.drewctaylor.constrain.ConstrainBound.Inclusive;
-import io.github.drewctaylor.constrain.ConstrainBound.Maximum;
-import io.github.drewctaylor.constrain.ConstrainBound.MaximumExclusive;
-import io.github.drewctaylor.constrain.ConstrainBound.Minimum;
-import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusive;
-import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0$;
+package io.github.drewctaylor.constrain.number;
 
 import static io.github.drewctaylor.require.RequireNumberShort.requireNegative;
 import static io.github.drewctaylor.require.RequireNumberShort.requirePositive;
 import static io.github.drewctaylor.require.RequireNumberShort.requireZero;
 import static io.github.drewctaylor.require.RequireNumberShort.requireZeroOrNegative;
 import static io.github.drewctaylor.require.RequireNumberShort.requireZeroOrPositive;
-import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0;
-import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.integer;
 
 /**
  * Constrain a Short to be positive, negative, or zero.
@@ -24,22 +15,20 @@ public final class ConstrainNumberShort
     {
     }
 
-    private static final ConstrainNumberHelper<Short, _0$> constrainNumberHelper = new ConstrainNumberHelper<>(integer(_0()));
+    private static final ConstrainNumberHelper<Short> constrainNumberHelper = new ConstrainNumberHelper<>();
 
     /**
      * Constrain the given value, if positive; otherwise, throw an IllegalArgumentException.
      *
      * @param  value                    the given value
      * @param  name                     the name of the given value
-     * 
      * @return                          the given value if positive
-     * 
      * @throws NullPointerException     if value is null
      * @throws IllegalArgumentException if value is not positive
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is blank
      */
-    public static MinimumExclusive<Short, _0$> constrainPositive(
+    public static Positive<Short> constrainPositive(
             final Short value,
             final String name)
     {
@@ -51,15 +40,13 @@ public final class ConstrainNumberShort
      *
      * @param  value                    the given value
      * @param  name                     the name of the given value
-     * 
      * @return                          the given value if zero or positive
-     * 
      * @throws NullPointerException     if value is null
      * @throws IllegalArgumentException if value is not zero or not positive
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is blank
      */
-    public static Minimum<Short, _0$> constrainZeroOrPositive(
+    public static ZeroOrPositive<Short> constrainZeroOrPositive(
             final Short value,
             final String name)
     {
@@ -71,15 +58,13 @@ public final class ConstrainNumberShort
      *
      * @param  value                    the given value
      * @param  name                     the name of the given value
-     * 
      * @return                          the given value if zero
-     * 
      * @throws NullPointerException     if value is null
      * @throws IllegalArgumentException if value is not zero
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is blank
      */
-    public static Inclusive<Short, _0$, _0$> constrainZero(
+    public static Zero<Short> constrainZero(
             final Short value,
             final String name)
     {
@@ -91,15 +76,13 @@ public final class ConstrainNumberShort
      *
      * @param  value                    the given value
      * @param  name                     the name of the given value
-     * 
      * @return                          the given value if zero or negative
-     * 
      * @throws NullPointerException     if value is null
      * @throws IllegalArgumentException if value is not zero or not negative
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is blank
      */
-    public static Maximum<Short, _0$> constrainZeroOrNegative(
+    public static ZeroOrNegative<Short> constrainZeroOrNegative(
             final Short value,
             final String name)
     {
@@ -111,15 +94,13 @@ public final class ConstrainNumberShort
      *
      * @param  value                    the given value
      * @param  name                     the name of the given value
-     * 
      * @return                          the given value if negative
-     * 
      * @throws NullPointerException     if value is null
      * @throws IllegalArgumentException if value is not negative
      * @throws NullPointerException     if name is null
      * @throws IllegalArgumentException if name is blank
      */
-    public static MaximumExclusive<Short, _0$> constrainNegative(
+    public static Negative<Short> constrainNegative(
             final Short value,
             final String name)
     {

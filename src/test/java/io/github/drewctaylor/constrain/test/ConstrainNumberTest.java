@@ -5,14 +5,14 @@ import io.github.drewctaylor.constrain.ConstrainBound.Maximum;
 import io.github.drewctaylor.constrain.ConstrainBound.MaximumExclusive;
 import io.github.drewctaylor.constrain.ConstrainBound.Minimum;
 import io.github.drewctaylor.constrain.ConstrainBound.MinimumExclusive;
-import io.github.drewctaylor.constrain.ConstrainNumberBigDecimal;
-import io.github.drewctaylor.constrain.ConstrainNumberBigInteger;
-import io.github.drewctaylor.constrain.ConstrainNumberByte;
-import io.github.drewctaylor.constrain.ConstrainNumberDouble;
-import io.github.drewctaylor.constrain.ConstrainNumberFloat;
-import io.github.drewctaylor.constrain.ConstrainNumberInteger;
-import io.github.drewctaylor.constrain.ConstrainNumberLong;
-import io.github.drewctaylor.constrain.ConstrainNumberShort;
+import io.github.drewctaylor.constrain.number.ConstrainNumberBigDecimal;
+import io.github.drewctaylor.constrain.number.ConstrainNumberBigInteger;
+import io.github.drewctaylor.constrain.number.ConstrainNumberByte;
+import io.github.drewctaylor.constrain.number.ConstrainNumberDouble;
+import io.github.drewctaylor.constrain.number.ConstrainNumberFloat;
+import io.github.drewctaylor.constrain.number.ConstrainNumberInteger;
+import io.github.drewctaylor.constrain.number.ConstrainNumberLong;
+import io.github.drewctaylor.constrain.number.ConstrainNumberShort;
 import io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0$;
 import org.junit.jupiter.api.Test;
 
@@ -116,12 +116,12 @@ final class ConstrainNumberTest
                 ConstrainNumberBigInteger::constrainZeroOrPositive);
     }
 
+    @SuppressWarnings("NumericCastThatLosesPrecision")
     @Test
     void testBoundByte()
     {
         final var maxSize = 5L;
 
-        // noinspection NumericCastThatLosesPrecision
         testBoundNumber(
                 iterate((byte) -1, b -> (byte) (b - 1)).limit(maxSize).collect(toList()),
                 iterate((byte) 1, b -> (byte) (b + 1)).limit(maxSize).collect(toList()),
@@ -197,12 +197,12 @@ final class ConstrainNumberTest
                 ConstrainNumberLong::constrainZeroOrPositive);
     }
 
+    @SuppressWarnings("NumericCastThatLosesPrecision")
     @Test
     void testBoundShort()
     {
         final var maxSize = 5L;
 
-        // noinspection NumericCastThatLosesPrecision
         testBoundNumber(
                 iterate((short) -1, sh -> (short) (sh - 1)).limit(maxSize).collect(toList()),
                 iterate((short) 1, sh -> (short) (sh + 1)).limit(maxSize).collect(toList()),
