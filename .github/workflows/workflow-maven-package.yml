@@ -14,12 +14,12 @@ jobs:
         uses: drewctaylor/setup-java@actions-setup-java-85-b
         with:
           java-version: 11
-          server-id-list: require, type-encoded, github
+          server-id-list: github, maven, require, type-encoded
           server-username: SERVER_USERNAME
           server-password: SERVER_PASSWORD
 
       - name: Step 3 - Maven Package.
-        run: mvn -B package
+        run: mvn -B package -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
         env:
           SERVER_USERNAME: ${{ github.actor }}
           SERVER_PASSWORD: ${{ github.token }}
