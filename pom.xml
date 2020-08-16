@@ -51,17 +51,5 @@
             <name>GitHub Packages</name>
             <url>https://maven.pkg.github.com/drewctaylor/maven</url>
         </repository>
-
-        <repository>
-            <id>require</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/drewctaylor/require</url>
-        </repository>
-
-        <repository>
-            <id>type-encoded</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/drewctaylor/type-encoded</url>
-        </repository>
     </repositories>
 </project>
