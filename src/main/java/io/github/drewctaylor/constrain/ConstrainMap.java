@@ -53,7 +53,9 @@ public final class ConstrainMap
      * @param  <KEY>                    the type of the map key
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
+     * 
      * @return                          the given map, if empty
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map is not empty
      * @throws NullPointerException     if name is null
@@ -74,7 +76,9 @@ public final class ConstrainMap
      * @param  <KEY>                    the type of the map key
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
+     * 
      * @return                          the given map, if non-empty
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map is not empty
      * @throws NullPointerException     if name is null
@@ -97,7 +101,9 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given map, if size less than the given maximum
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not less than the given maximum
      * @throws NullPointerException     if maximum is null
@@ -125,7 +131,9 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given map, if size is less than or equal to the given maximum
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not less than or equal to the given maximum
      * @throws NullPointerException     if maximum is null
@@ -152,7 +160,9 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <SIZE>                   the type of the given size
+     * 
      * @return                          the given map, if size is the given size
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not the given size
      * @throws NullPointerException     if size is null
@@ -180,7 +190,9 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
+     * 
      * @return                          the given map, if size is greater than or equal to the given size
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not greater than or equal to the given size
      * @throws NullPointerException     if minimum is null
@@ -207,7 +219,9 @@ public final class ConstrainMap
      * @param  <VALUE>                  the type of the map value
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
+     * 
      * @return                          the given map, if size is greater than the given size
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not greater than the given size
      * @throws NullPointerException     if minimum is null
@@ -237,7 +251,9 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -270,7 +286,9 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -303,7 +321,9 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -336,7 +356,9 @@ public final class ConstrainMap
      * @param  <MAP>                    the type of the map
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given map, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if map is null
      * @throws IllegalArgumentException if map size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null

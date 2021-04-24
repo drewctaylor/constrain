@@ -48,7 +48,9 @@ public final class ConstrainString
      *
      * @param  string                   the given string
      * @param  name                     the name of the given string
+     * 
      * @return                          the given string, if empty
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string is not empty
      * @throws NullPointerException     if name is null
@@ -66,7 +68,9 @@ public final class ConstrainString
      *
      * @param  string                   the given string
      * @param  name                     the name of the given string
+     * 
      * @return                          the given string, if non-empty
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string is not empty
      * @throws NullPointerException     if name is null
@@ -86,7 +90,9 @@ public final class ConstrainString
      * @param  maximum                  the given maximum
      * @param  name                     the name of the given string
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given string, if length less than the given maximum
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not less than the given maximum
      * @throws NullPointerException     if maximum is null
@@ -111,7 +117,9 @@ public final class ConstrainString
      * @param  maximum                  the given maximum
      * @param  name                     the name of the given string
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given string, if length is less than or equal to the given maximum
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not less than or equal to the given maximum
      * @throws NullPointerException     if maximum is null
@@ -135,7 +143,9 @@ public final class ConstrainString
      * @param  length                   the given length
      * @param  name                     the name of the given string
      * @param  <LENGTH>                 the type of the given length
+     * 
      * @return                          the given string, if length is the given length
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not the given length
      * @throws NullPointerException     if length is null
@@ -160,7 +170,9 @@ public final class ConstrainString
      * @param  minimum                  the given minimum
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
+     * 
      * @return                          the given string, if length is greater than or equal to the given length
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not greater than or equal to the given length
      * @throws NullPointerException     if minimum is null
@@ -184,7 +196,9 @@ public final class ConstrainString
      * @param  minimum                  the given minimum
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
+     * 
      * @return                          the given string, if length is greater than the given length
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not greater than the given length
      * @throws NullPointerException     if minimum is null
@@ -211,7 +225,9 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -241,7 +257,9 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -271,7 +289,9 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -301,7 +321,9 @@ public final class ConstrainString
      * @param  name                     the name of the given string
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given string, if length is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if string is null
      * @throws IllegalArgumentException if string length is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null

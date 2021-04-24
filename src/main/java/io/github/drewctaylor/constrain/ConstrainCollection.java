@@ -52,7 +52,9 @@ public final class ConstrainCollection
      * @param  name                     the name of the given collection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
+     * 
      * @return                          the given collection, if empty
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection is not empty
      * @throws NullPointerException     if name is null
@@ -72,7 +74,9 @@ public final class ConstrainCollection
      * @param  name                     the name of the given collection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
+     * 
      * @return                          the given collection, if non-empty
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection is not empty
      * @throws NullPointerException     if name is null
@@ -94,7 +98,9 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given collection, if size less than the given maximum
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not less than the given maximum
      * @throws NullPointerException     if maximum is null
@@ -121,7 +127,9 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given collection, if size is less than or equal to the given maximum
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not less than or equal to the given maximum
      * @throws NullPointerException     if maximum is null
@@ -147,7 +155,9 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <SIZE>                   the given size, encoded as a type
+     * 
      * @return                          the given collection, if size is the given size
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not the given size
      * @throws NullPointerException     if size is null
@@ -174,7 +184,9 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
+     * 
      * @return                          the given collection, if size is greater than or equal to the given size
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not greater than or equal to the given size
      * @throws NullPointerException     if minimum is null
@@ -200,7 +212,9 @@ public final class ConstrainCollection
      * @param  <TYPE>                   the type of the collection element
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
+     * 
      * @return                          the given collection, if size is greater than the given size
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not greater than the given size
      * @throws NullPointerException     if minimum is null
@@ -229,7 +243,9 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -261,7 +277,9 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -294,7 +312,9 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null
@@ -327,7 +347,9 @@ public final class ConstrainCollection
      * @param  <COLLECTION>             the type of the collection
      * @param  <MIN>                    the given minimum, encoded as a type
      * @param  <MAX>                    the given maximum, encoded as a type
+     * 
      * @return                          the given collection, if size is between the given minimum and the given maximum
+     * 
      * @throws NullPointerException     if collection is null
      * @throws IllegalArgumentException if collection size is not between the given minimum and the given maximum
      * @throws NullPointerException     if minimum is null

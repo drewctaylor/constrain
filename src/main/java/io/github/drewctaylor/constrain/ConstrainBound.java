@@ -208,7 +208,9 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
@@ -234,7 +236,9 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
@@ -260,7 +264,9 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
@@ -286,7 +292,9 @@ public final class ConstrainBound
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
      * @param  <MAX>                the maximum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      * @throws NullPointerException if maximum is null
@@ -505,7 +513,9 @@ public final class ConstrainBound
      * @param  maximum              the given maximum value
      * @param  <TYPE>               the type of the given value
      * @param  <MAX>                the maximum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if maximum is null
      */
@@ -526,7 +536,9 @@ public final class ConstrainBound
      * @param  maximum              the given maximum value
      * @param  <TYPE>               the type of the given value
      * @param  <MAX>                the maximum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if maximum is null
      */
@@ -547,7 +559,9 @@ public final class ConstrainBound
      * @param  minimum              the given minimum value
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      */
@@ -568,7 +582,9 @@ public final class ConstrainBound
      * @param  minimum              the given minimum value
      * @param  <TYPE>               the type of the given value
      * @param  <MIN>                the minimum value, encoded as a type
+     * 
      * @return                      the given value
+     * 
      * @throws NullPointerException if value is null
      * @throws NullPointerException if minimum is null
      */
