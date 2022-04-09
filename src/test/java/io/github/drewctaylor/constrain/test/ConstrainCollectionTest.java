@@ -12,6 +12,7 @@ import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._0;
 import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._1;
 import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder._2;
 import static io.github.drewctaylor.typeencoded.TypeEncodedIntegerBuilder.integer;
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,7 +37,7 @@ final class ConstrainCollectionTest
     @Test
     void testConstrainNonEmpty()
     {
-        final var valid = singletonList(new Object());
+        final List<Object> valid = singletonList(new Object());
 
         assertThrows(NullPointerException.class, () -> constrainNonEmpty(emptyList(), null));
         assertThrows(IllegalArgumentException.class, () -> constrainNonEmpty(emptyList(), ""));
@@ -68,30 +69,30 @@ final class ConstrainCollectionTest
         assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(emptyList(), integer(_0()), " "));
         assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThan(emptyList(), integer(_0()), " "));
 
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeLessThan(List.of(0), integer(_2()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeLessThanOrEqual(List.of(0), integer(_1()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSize(List.of(0), integer(_1()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeGreaterThanOrEqual(List.of(0), integer(_1()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeGreaterThan(List.of(0), integer(_0()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeLessThan(asList(0), integer(_2()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeLessThanOrEqual(asList(0), integer(_1()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSize(asList(0), integer(_1()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeGreaterThanOrEqual(asList(0), integer(_1()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeGreaterThan(asList(0), integer(_0()), "name").getValue());
 
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThan(List.of(0), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThanOrEqual(List.of(0), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(List.of(0), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(List.of(0), integer(_2()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThan(List.of(0), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThan(asList(0), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeLessThanOrEqual(asList(0), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(asList(0), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThanOrEqual(asList(0), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeGreaterThan(asList(0), integer(_1()), "name"));
 
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeExclusive(List.of(0), integer(_0()), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeExclusive(List.of(0), integer(_1()), integer(_2()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(List.of(0), integer(_1()), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(List.of(0), integer(_2()), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(List.of(0), integer(_1()), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(List.of(0), integer(_0()), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(List.of(0), integer(_2()), integer(_2()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(List.of(0), integer(_1()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeExclusive(asList(0), integer(_0()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeExclusive(asList(0), integer(_1()), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(asList(0), integer(_1()), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSize(asList(0), integer(_2()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(asList(0), integer(_1()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(asList(0), integer(_0()), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(asList(0), integer(_2()), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(asList(0), integer(_1()), integer(_1()), "name"));
 
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeExclusive(List.of(0), integer(_0()), integer(_2()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSize(List.of(0), integer(_1()), integer(_1()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(List.of(0), integer(_0()), integer(_1()), "name").getValue());
-        assertEquals(List.of(0), ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(List.of(0), integer(_1()), integer(_2()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeExclusive(asList(0), integer(_0()), integer(_2()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSize(asList(0), integer(_1()), integer(_1()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeMinimumExclusiveMaximumInclusive(asList(0), integer(_0()), integer(_1()), "name").getValue());
+        assertEquals(asList(0), ConstrainCollection.constrainSizeMinimumInclusiveMaximumExclusive(asList(0), integer(_1()), integer(_2()), "name").getValue());
     }
 }

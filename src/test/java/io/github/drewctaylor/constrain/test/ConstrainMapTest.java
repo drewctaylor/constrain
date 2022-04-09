@@ -2,6 +2,7 @@ package io.github.drewctaylor.constrain.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static io.github.drewctaylor.constrain.ConstrainMap.constrainEmpty;
@@ -28,8 +29,8 @@ final class ConstrainMapTest
     @Test
     void testConstrainEmpty()
     {
-        final var valueInvalid = singletonMap(new Object(), new Object());
-        final var valueValid = emptyMap();
+        final Map<Object, Object> valueInvalid = singletonMap(new Object(), new Object());
+        final Map<Object, Object> valueValid = emptyMap();
 
         assertThrows(NullPointerException.class, () -> constrainEmpty(valueValid, null));
         assertThrows(IllegalArgumentException.class, () -> constrainEmpty(valueValid, ""));
@@ -41,7 +42,7 @@ final class ConstrainMapTest
     @Test
     void testConstrainNonEmpty()
     {
-        final var valid = singletonMap(new Object(), new Object());
+        final Map<Object, Object> valid = singletonMap(new Object(), new Object());
 
         assertThrows(NullPointerException.class, () -> constrainNonEmpty(valid, null));
         assertThrows(IllegalArgumentException.class, () -> constrainNonEmpty(valid, ""));
@@ -71,30 +72,37 @@ final class ConstrainMapTest
         assertThrows(IllegalArgumentException.class, () -> constrainSizeGreaterThanOrEqual(emptyMap(), integer(_0()), " "));
         assertThrows(IllegalArgumentException.class, () -> constrainSizeGreaterThan(emptyMap(), integer(_0()), " "));
 
-        assertEquals(Map.of(0, "zero"), constrainSizeLessThan(Map.of(0, "zero"), integer(_2()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSizeLessThanOrEqual(Map.of(0, "zero"), integer(_1()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSize(Map.of(0, "zero"), integer(_1()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSizeGreaterThanOrEqual(Map.of(0, "zero"), integer(_1()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSizeGreaterThan(Map.of(0, "zero"), integer(_0()), "name").getValue());
+        final HashMap<Integer, String> map = new HashMap<Integer, String>()
+        {
+            {
+                put(0, "zero");
+            }
+        };
 
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeLessThan(Map.of(0, "zero"), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeLessThanOrEqual(Map.of(0, "zero"), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSize(Map.of(0, "zero"), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeGreaterThanOrEqual(Map.of(0, "zero"), integer(_2()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeGreaterThan(Map.of(0, "zero"), integer(_1()), "name"));
+        assertEquals(map, constrainSizeLessThan(map, integer(_2()), "name").getValue());
+        assertEquals(map, constrainSizeLessThanOrEqual(map, integer(_1()), "name").getValue());
+        assertEquals(map, constrainSize(map, integer(_1()), "name").getValue());
+        assertEquals(map, constrainSizeGreaterThanOrEqual(map, integer(_1()), "name").getValue());
+        assertEquals(map, constrainSizeGreaterThan(map, integer(_0()), "name").getValue());
 
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeExclusive(Map.of(0, "zero"), integer(_0()), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeExclusive(Map.of(0, "zero"), integer(_1()), integer(_2()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSize(Map.of(0, "zero"), integer(_1()), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSize(Map.of(0, "zero"), integer(_2()), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumExclusiveMaximumInclusive(Map.of(0, "zero"), integer(_1()), integer(_1()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumExclusiveMaximumInclusive(Map.of(0, "zero"), integer(_0()), integer(_0()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumInclusiveMaximumExclusive(Map.of(0, "zero"), integer(_2()), integer(_2()), "name"));
-        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumInclusiveMaximumExclusive(Map.of(0, "zero"), integer(_1()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeLessThan(map, integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeLessThanOrEqual(map, integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSize(map, integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeGreaterThanOrEqual(map, integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeGreaterThan(map, integer(_1()), "name"));
 
-        assertEquals(Map.of(0, "zero"), constrainSizeExclusive(Map.of(0, "zero"), integer(_0()), integer(_2()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSize(Map.of(0, "zero"), integer(_1()), integer(_1()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSizeMinimumExclusiveMaximumInclusive(Map.of(0, "zero"), integer(_0()), integer(_1()), "name").getValue());
-        assertEquals(Map.of(0, "zero"), constrainSizeMinimumInclusiveMaximumExclusive(Map.of(0, "zero"), integer(_1()), integer(_2()), "name").getValue());
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeExclusive(map, integer(_0()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeExclusive(map, integer(_1()), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSize(map, integer(_1()), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSize(map, integer(_2()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumExclusiveMaximumInclusive(map, integer(_1()), integer(_1()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumExclusiveMaximumInclusive(map, integer(_0()), integer(_0()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumInclusiveMaximumExclusive(map, integer(_2()), integer(_2()), "name"));
+        assertThrows(IllegalArgumentException.class, () -> constrainSizeMinimumInclusiveMaximumExclusive(map, integer(_1()), integer(_1()), "name"));
+
+        assertEquals(map, constrainSizeExclusive(map, integer(_0()), integer(_2()), "name").getValue());
+        assertEquals(map, constrainSize(map, integer(_1()), integer(_1()), "name").getValue());
+        assertEquals(map, constrainSizeMinimumExclusiveMaximumInclusive(map, integer(_0()), integer(_1()), "name").getValue());
+        assertEquals(map, constrainSizeMinimumInclusiveMaximumExclusive(map, integer(_1()), integer(_2()), "name").getValue());
     }
 }

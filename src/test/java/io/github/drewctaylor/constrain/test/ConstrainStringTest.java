@@ -31,8 +31,8 @@ final class ConstrainStringTest
     @Test
     void testRequireEmpty()
     {
-        final var invalid = "a";
-        final var valid = "";
+        final String invalid = "a";
+        final String valid = "";
 
         assertThrows(NullPointerException.class, () -> constrainEmpty(valid, null));
         assertThrows(IllegalArgumentException.class, () -> constrainEmpty(valid, ""));
@@ -45,8 +45,8 @@ final class ConstrainStringTest
     @Test
     void testRequireNonEmpty()
     {
-        final var invalid = "";
-        final var valid = "a";
+        final String invalid = "";
+        final String valid = "a";
 
         assertThrows(NullPointerException.class, () -> constrainNonEmpty(valid, null));
         assertThrows(IllegalArgumentException.class, () -> constrainNonEmpty(valid, ""));
