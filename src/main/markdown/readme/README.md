@@ -3,6 +3,8 @@
 
 # Constrain
 
+This library provides a way to constrain values to be less than a maximum, greater than a minimum, or both, and to encode those constraints into the type of the value.
+
 ```java
 final class ConstrainStringTest
 {

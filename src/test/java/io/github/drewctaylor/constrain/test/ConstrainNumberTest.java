@@ -87,7 +87,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundBigDecimal()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate(-1L, l -> l - 1L).limit(maxSize).map(BigDecimal::valueOf).collect(toList()),
@@ -103,7 +103,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundBigInteger()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate(-1L, l -> l - 1L).limit(maxSize).map(BigInteger::valueOf).collect(toList()),
@@ -120,7 +120,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundByte()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate((byte) -1, b -> (byte) (b - 1)).limit(maxSize).collect(toList()),
@@ -136,7 +136,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundDouble()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate(-1.0, d -> d - 1.0).limit(maxSize).collect(toList()),
@@ -152,7 +152,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundFloat()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate(-1.0f, f -> f - 1.0f).limit(maxSize).collect(toList()),
@@ -168,7 +168,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundInt()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate(-1, i -> i - 1).limit(maxSize).collect(toList()),
@@ -184,7 +184,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundLong()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate(-1L, l -> l - 1L).limit(maxSize).collect(toList()),
@@ -201,7 +201,7 @@ final class ConstrainNumberTest
     @Test
     void testBoundShort()
     {
-        final var maxSize = 5L;
+        final long maxSize = 5L;
 
         testBoundNumber(
                 iterate((short) -1, sh -> (short) (sh - 1)).limit(maxSize).collect(toList()),
