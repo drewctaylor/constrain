@@ -142,7 +142,7 @@ final class ConstrainStringTest
         <dependency>
             <groupId>io.github.drewctaylor</groupId>
             <artifactId>constrain</artifactId>
-            <version>0.0.2-SNAPSHOT</version>
+            <version>0.0.2</version>
         </dependency>
     </dependencies>
     ```
